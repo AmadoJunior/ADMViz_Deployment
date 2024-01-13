@@ -1,0 +1,9 @@
+# Local Data
+.redisData/
+.sqlData/
+
+# ENV
+.env
+
+# SSL
+.certbot
