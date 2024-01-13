@@ -63,6 +63,8 @@ services:
       args:
         GITHUB_REPO_URL: ${GITHUB_FE_REPO_URL}
         APP_DOMAIN: ${APP_DOMAIN}
+        VITE_API_ENDPOINT: ${VITE_API_ENDPOINT}
+        NODE_ENV: ${NODE_ENV}
     container_name: client
     hostname: client
     restart: always

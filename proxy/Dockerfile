@@ -4,7 +4,7 @@ FROM nginx:latest
 RUN apt-get update && apt-get install -y gettext-base
 
 # Copy Templates
-COPY proxyServer.conf /etc/nginx/sites-available/${APP_DOMAIN}.template.conf
+COPY ./proxyServer.conf /etc/nginx/sites-available/${APP_DOMAIN}.template.conf
 
 #Replace ENV
 RUN envsubst < /etc/nginx/sites-available/${APP_DOMAIN}.template.conf > /etc/nginx/sites-available/${APP_DOMAIN}.conf

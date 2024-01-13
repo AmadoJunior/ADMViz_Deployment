@@ -11,6 +11,9 @@ RUN git clone ${GITHUB_FE_REPO_URL} /app
 
 WORKDIR /app
 
+RUN echo "VITE_API_ENDPOINT=${VITE_API_ENDPOINT}" > .env \
+  && echo "NODE_ENV=${NODE_ENV}" > .env
+
 RUN npm install
 
 RUN npm run build
@@ -26,7 +29,7 @@ RUN apt-get update && apt-get install -y gettext-base
 COPY --from=build /app/dist/ /var/www/html/${APP_DOMAIN}
 
 # Copy Templates
-COPY staticServer.conf /etc/nginx/sites-available/${APP_DOMAIN}.template.conf
+COPY ./staticServer.conf /etc/nginx/sites-available/${APP_DOMAIN}.template.conf
 
 #Replace ENV
 RUN envsubst < /etc/nginx/sites-available/${APP_DOMAIN}.template.conf > /etc/nginx/sites-available/${APP_DOMAIN}.conf
