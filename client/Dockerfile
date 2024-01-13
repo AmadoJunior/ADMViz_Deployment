@@ -1,20 +1,22 @@
 #
 # Build
 #
-FROM node:latest AS build
+FROM node:lts AS build
 
 RUN apt-get update && apt-get install -y git
 
 ARG GITHUB_FE_REPO_URL
+ARG VITE_API_ENDPOINT
+ARG NODE_ENV
 
 RUN git clone ${GITHUB_FE_REPO_URL} /app
 
 WORKDIR /app
 
 RUN echo "VITE_API_ENDPOINT=${VITE_API_ENDPOINT}" > .env \
-  && echo "NODE_ENV=${NODE_ENV}" > .env
+  && echo "NODE_ENV=${NODE_ENV}" >> .env
 
-RUN npm install
+RUN npm cache clean --force && npm install
 
 RUN npm run build
 
@@ -23,19 +25,20 @@ RUN npm run build
 #
 FROM nginx:latest
 
+ARG APP_DOMAIN
+
+WORKDIR /
+
 # Install gettext for envsubst
 RUN apt-get update && apt-get install -y gettext-base
 
 COPY --from=build /app/dist/ /var/www/html/${APP_DOMAIN}
 
 # Copy Templates
-COPY ./staticServer.conf /etc/nginx/sites-available/${APP_DOMAIN}.template.conf
+COPY ./staticServer.conf /
 
 #Replace ENV
-RUN envsubst < /etc/nginx/sites-available/${APP_DOMAIN}.template.conf > /etc/nginx/sites-available/${APP_DOMAIN}.conf
+RUN envsubst \$APP_DOMAIN < /staticServer.conf > /etc/nginx/conf.d/${APP_DOMAIN}.conf
 
-#Activate Site
-RUN ln -s /etc/nginx/sites-available/${APP_DOMAIN}.conf /etc/nginx/sites-enabled/
-
-# Start NGINX
-ENTRYPOINT ["nginx ","-g","'daemon off;'"]
+# Remove Template 
+RUN rm /staticServer.conf
