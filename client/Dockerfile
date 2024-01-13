@@ -5,11 +5,12 @@ FROM node:lts AS build
 
 RUN apt-get update && apt-get install -y git
 
-ARG GITHUB_FE_REPO_URL
+ARG GITHUB_FE_REPO_PATH
+ARG GIT_TOKEN
 ARG VITE_API_ENDPOINT
 ARG NODE_ENV
 
-RUN git clone ${GITHUB_FE_REPO_URL} /app
+RUN git clone https://${GIT_TOKEN}@github.com${GITHUB_FE_REPO_URL} /app
 
 WORKDIR /app
 

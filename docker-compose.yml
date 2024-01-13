@@ -36,7 +36,8 @@ services:
     build: 
       context: server
       args:
-        GITHUB_REPO_URL: ${GITHUB_REPO_URL}
+        GITHUB_BE_REPO_PATH: ${GITHUB_BE_REPO_PATH}
+        GIT_TOKEN: ${GIT_TOKEN}
     container_name: spring
     hostname: spring
     restart: always
@@ -61,7 +62,8 @@ services:
     build: 
       context: client
       args:
-        GITHUB_FE_REPO_URL: ${GITHUB_FE_REPO_URL}
+        GITHUB_FE_REPO_PATH: ${GITHUB_FE_REPO_PATH}
+        GIT_TOKEN: ${GIT_TOKEN}
         APP_DOMAIN: ${APP_DOMAIN}
         VITE_API_ENDPOINT: ${VITE_API_ENDPOINT}
         NODE_ENV: ${NODE_ENV}
