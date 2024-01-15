@@ -10,7 +10,7 @@ ARG GIT_TOKEN
 ARG VITE_API_ENDPOINT
 ARG NODE_ENV
 
-RUN git clone https://${GIT_TOKEN}@github.com${GITHUB_FE_REPO_URL} /app
+RUN git clone https://${GIT_TOKEN}@github.com${GITHUB_FE_REPO_PATH} /app
 
 WORKDIR /app
 
