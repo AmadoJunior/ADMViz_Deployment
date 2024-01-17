@@ -5,8 +5,8 @@ services:
     container_name: mysql
     hostname: mysql
     restart: always
-    ports:
-        - "3306:3306"
+    # ports:
+    #     - "3306:3306"
     volumes:
      - ./.sqlData:/var/lib/mysql
     env_file:
@@ -22,8 +22,8 @@ services:
     container_name: redis
     hostname: redis
     restart: always
-    ports:
-        - "6379:6379"
+    # ports:
+    #     - "6379:6379"
     volumes:
      - ./.redisData:/data
     env_file:
@@ -41,8 +41,8 @@ services:
     container_name: spring
     hostname: spring
     restart: always
-    ports:
-        - "8080:8080"
+    # ports:
+    #     - "8080:8080"
     env_file:
         - .env
     environment:
@@ -66,12 +66,12 @@ services:
         GIT_TOKEN: ${GIT_TOKEN}
         APP_DOMAIN: ${APP_DOMAIN}
         VITE_API_ENDPOINT: ${VITE_API_ENDPOINT}
-        NODE_ENV: ${NODE_ENV}
+        VITE_NODE_ENV: ${VITE_NODE_ENV}
     container_name: client
     hostname: client
     restart: always
-    ports:
-        - "3000:3000"
+    # ports:
+    #     - "3000:3000"
     env_file:
         - .env
     environment:
@@ -94,6 +94,8 @@ services:
         - .env
     environment:
       APP_DOMAIN: ${APP_DOMAIN}
+      API_HOST: ${API_HOST}
+      CLIENT_HOST: ${CLIENT_HOST}
     volumes:
       - ./.certbot/www:/var/www/certbot/:ro
       - ./.certbot/conf/:/etc/letsencrypt/:ro
