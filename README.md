@@ -1,4 +1,18 @@
-##
+## ENV Vars
+
+#### User 'sample.env' as a template to create your application speific '.env' file.
+
+### Build Step
+
+```
+docker compose build --no-cache
+```
+
+### Local Deploy
+
+```
+docker compose up -d
+```
 
 ## SSL
 
