@@ -1,6 +1,6 @@
 ## ENV Vars
 
-#### User 'sample.env' as a template to create your application speific '.env' file.
+#### Use 'sample.env' as a template to create application specific '.env' file.
 
 ### Build Step
 
