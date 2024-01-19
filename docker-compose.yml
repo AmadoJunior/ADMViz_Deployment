@@ -5,12 +5,10 @@ services:
     container_name: mysql
     hostname: mysql
     restart: always
-    ports:
-        - "3306:3306"
+    # ports:
+    #     - "3306:3306"
     volumes:
      - ./.sqlData:/var/lib/mysql
-    env_file:
-        - .env
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -22,12 +20,10 @@ services:
     container_name: redis
     hostname: redis
     restart: always
-    ports:
-        - "6379:6379"
+    # ports:
+    #     - "6379:6379"
     volumes:
      - ./.redisData:/data
-    env_file:
-    - .env
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     command: redis-server --requirepass ${REDIS_PASSWORD}
@@ -43,8 +39,6 @@ services:
     restart: always
     # ports:
     #     - "8080:8080"
-    env_file:
-        - .env
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_HOST: ${MYSQL_HOST}
@@ -79,8 +73,6 @@ services:
     restart: always
     # ports:
     #     - "3000:3000"
-    env_file:
-        - .env
     environment:
       APP_DOMAIN: ${APP_DOMAIN}
 
@@ -97,8 +89,6 @@ services:
     ports:
         - "443:443"
         - "80:80"
-    env_file:
-        - .env
     environment:
       APP_DOMAIN: ${APP_DOMAIN}
       API_HOST: ${API_HOST}
