@@ -5,8 +5,8 @@ services:
     container_name: mysql
     hostname: mysql
     restart: always
-    # ports:
-    #     - "3306:3306"
+    ports:
+        - "3306:3306"
     volumes:
      - ./.sqlData:/var/lib/mysql
     env_file:
@@ -22,8 +22,8 @@ services:
     container_name: redis
     hostname: redis
     restart: always
-    # ports:
-    #     - "6379:6379"
+    ports:
+        - "6379:6379"
     volumes:
      - ./.redisData:/data
     env_file:
@@ -54,6 +54,12 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       EMAIL_USER: ${EMAIL_USER}
       EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+      RECAPTCHA_SITE: ${RECAPTCHA_SITE}
+      RECAPTCHA_SECRET: ${RECAPTCHA_SECRET}
+      APP_DOMAIN: ${APP_DOMAIN}
+      SPRING_ENV: ${SPRING_ENV}
+      DASHBOARD_LIMIT: ${DASHBOARD_LIMIT}
+      CHART_LIMIT: ${CHART_LIMIT}
     depends_on:
       - mysql
       - redis
@@ -67,6 +73,7 @@ services:
         APP_DOMAIN: ${APP_DOMAIN}
         VITE_API_ENDPOINT: ${VITE_API_ENDPOINT}
         VITE_NODE_ENV: ${VITE_NODE_ENV}
+        RECAPTCHA_SITE: ${RECAPTCHA_SITE}
     container_name: client
     hostname: client
     restart: always
