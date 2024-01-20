@@ -28,7 +28,7 @@ docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certb
 docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d example.org
 ```
 
-### Renew: docker compose run --rm certbot renew
+### Renew:
 
 ```
 docker compose run --rm certbot renew
