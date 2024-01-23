@@ -45,5 +45,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 #Replace ENV
 RUN envsubst \$APP_DOMAIN < /staticServer.conf > /etc/nginx/conf.d/${APP_DOMAIN}.conf
 
+EXPOSE 3000
+
 # Remove Template 
 RUN rm /staticServer.conf
